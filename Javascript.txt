@@ -1,0 +1,35 @@
+Javascript
+let cart = [];
+
+function addToCart(name, price) {
+    const item = { name, price };
+    cart.push(item);
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPrice = document.getElementById('total-price');
+
+    cartItems.innerHTML = ''; // Clear previous items
+    let total = 0;
+
+    cart.forEach(item => {
+        const itemElement = document.createElement('p');
+        itemElement.textContent = `${item.name} - $${item.price}`;
+        cartItems.appendChild(itemElement);
+        total += item.price;
+    });
+
+    totalPrice.textContent = total;
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+    } else {
+        alert("Thank you for your purchase!");
+        cart = [];
+        updateCart();
+    } 
+}
